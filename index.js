@@ -150,6 +150,7 @@ function Auth0 (options) {
   this._callbackURL = options.callbackURL || document.location.href;
   this._shouldRedirect = !!options.callbackURL;
   this._domain = options.domain;
+  this._callback = options._callback;
   this._callbackOnLocationHash = false || options.callbackOnLocationHash;
   this._cordovaSocialPlugins = {
     facebook: this._phonegapFacebookLogin
@@ -838,7 +839,7 @@ Auth0.prototype.loginPhonegap = function (options, callback) {
 
     if (result.id_token) {
       _this.getProfile(result.id_token, function (err, profile) {
-        callback(err, profile, result.id_token, result.access_token, result.state, result.refresh_token);
+        _this._callback(err, profile);
       });
       answered = true;
       return ref.close();
