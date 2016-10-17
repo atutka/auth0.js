@@ -839,7 +839,7 @@ Auth0.prototype.loginPhonegap = function (options, callback) {
 
     if (result.id_token) {
       _this.getProfile(result.id_token, function (err, profile) {
-        _this._callback(err, profile);
+        _this._callback(err, profile, result.access_token);
       });
       answered = true;
       return ref.close();
